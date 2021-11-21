@@ -7,12 +7,12 @@ export default function SignOut() {
     const history = useNavigate();
 
     useEffect(() => {
-        // const response = axiosInstance.post('#', {
-        //     token: localStorage.getItem('token')
-        // });
         localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('email');
         axiosInstance.defaults.headers['Authorization'] = null;
         history('/login');
+        window.location.reload();
     });
     return <div>Logout</div>
 }

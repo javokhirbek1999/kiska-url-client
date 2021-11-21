@@ -63,6 +63,8 @@ export default function SignIn() {
         })
         .then((res) => {
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('username', res.data.username);
+            localStorage.setItem('email', res.data.email)
             history('/');
             window.location.reload();
         });

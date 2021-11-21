@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AppBar, Button, Link, makeStyles } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import { IconButton } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import { Avatar } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -18,8 +19,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 function Header() {
+    const [username, setUsername] = useState(localStorage.getItem('username'));
     const classes = useStyles();
+    
+    useEffect(() => {
+        if(localStorage.getItem('token') === "") {
+            setUsername(null);
+        }
+    });
 
     return (
         <React.Fragment>
@@ -46,26 +55,37 @@ function Header() {
                             KiskaURL
                         </Link>
                     </Typography>
-                    <nav>
-                        {/* <Link 
-                            href="#"
-                            color="primary"
-                            variant="outlined"
-                            className={classes.link}
-                            component={NavLink}
-                            to="/register">
-                                Register
-                        </Link> */}
-                    </nav>
-                    <Button
+                    { username === null ?
+                        <Button 
                         href="#"
                         color="primary"
                         variant="outlined"
                         className={classes.link}
                         component={NavLink}
-                        to="/login">
-                            Login
+                        to="/register">
+                            Register
+                    </Button>:
+                    <Button
+                    href="#"
+                    color="primary"
+                    variant="outlined"
+                    className={classes.link}
+                    component={NavLink}
+                    to="/user">
+                            {/* <Avatar src="/broken-image.jpg" sx={{width: 15, height: 15, margin: 5}} /> */}
+                            {username}
                     </Button>
+}
+            { username === null ?
+                <Button
+                    href="#"
+                    color="primary"
+                    variant="outlined"
+                    className={classes.link}
+                    component={NavLink}
+                    to="/login">
+                            Login
+                    </Button>:
                     <Button
                             href="#"
                             color="primary"
@@ -74,7 +94,7 @@ function Header() {
                             component={NavLink}
                             to="/logout">
                                 Logout
-                    </Button>
+                    </Button>}
                 </Toolbar>
             </AppBar>
         </React.Fragment>
