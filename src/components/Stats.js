@@ -53,6 +53,46 @@ const rows = [
     'VISA ⠀•••• 5919',
     212.79,
   ),
+  createData(
+    4,
+    '15 Mar, 2021',
+    'Bruce Springsteen',
+    'Long Branch, NJ',
+    'VISA ⠀•••• 5919',
+    212.79,
+  ),
+  createData(
+    4,
+    '15 Mar, 2019',
+    'Bruce Springsteen',
+    'Long Branch, NJ',
+    'VISA ⠀•••• 5919',
+    212.79,
+  ),
+  createData(
+    4,
+    '15 Mar, 2019',
+    'Bruce Springsteen',
+    'Long Branch, NJ',
+    'VISA ⠀•••• 5919',
+    212.79,
+  ),
+  createData(
+    4,
+    '15 Mar, 2019',
+    'Bruce Springsteen',
+    'Long Branch, NJ',
+    'VISA ⠀•••• 5919',
+    212.79,
+  ),
+  createData(
+    4,
+    '15 Mar, 2019',
+    'Bruce Springsteen',
+    'Long Branch, NJ',
+    'VISA ⠀•••• 5919',
+    212.79,
+  ),
 ];
 
 function preventDefault(event) {
@@ -68,18 +108,18 @@ export default function Stats() {
         <TableHead>
           <TableRow>
             <TableCell>User</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Shortened URL</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell align="right">Visited</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+              <TableCell>{row.date}</TableCell>
+              <TableCell align="right">{`${row.amount}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>
