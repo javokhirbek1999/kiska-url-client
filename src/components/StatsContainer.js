@@ -8,7 +8,10 @@ import '../App.css'
 
 import Stats from "./Stats";
 
-const StatsContainer = () => {
+const StatsContainer = (Component) => {
+  return function StatsLoadingComponent({isLoading, ...props}) {
+
+    if (isLoading) return <p style={{fontSize: '25px'}}>Fetching the data </p>
     return <div className="App">
         <Box
           component="main"
@@ -17,7 +20,7 @@ const StatsContainer = () => {
               theme.palette.mode === 'light'
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
-            flexGrow: 1,
+                flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
           }}
@@ -26,12 +29,13 @@ const StatsContainer = () => {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Stats />
+                  <Component {...props}/>
                 </Paper>
               </Grid>
           </Container>
         </Box>
     </div>
+}
 }
 
 export default StatsContainer;

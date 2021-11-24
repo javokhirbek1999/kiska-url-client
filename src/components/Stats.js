@@ -19,87 +19,17 @@ function createData(id, date, name, shipTo, paymentMethod, amount) {
   return { id, date, name, shipTo, paymentMethod, amount };
 }
 
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44,
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99,
-  ),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-  createData(
-    4,
-    '15 Mar, 2021',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-];
-
 function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Stats() {
+export default function Stats({data,...props}) {
+  console.log("Show the results:")
+  // console.log(props);
+  // const {data} = props;
+  console.log('We are loading from here')
+  console.log(data);
+  console.log(typeof data)
   return (
     <div className="App">
     <React.Fragment>
@@ -114,14 +44,22 @@ export default function Stats() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
+        {/* {data.map((d) => (
+            <TableRow key={d.id}>
+              <TableCell>{d.get_username}</TableCell>
+              <TableCell>{d.shortURL}</TableCell>
+              <TableCell>{d.date_created}</TableCell>
+              <TableCell align="right">{d.visited}</TableCell>
+            </TableRow>
+          ))} */}
+          {/* {rows.map((row) => (
+            <TableRow key={id}>
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
               <TableCell>{row.date}</TableCell>
               <TableCell align="right">{`${row.amount}`}</TableCell>
             </TableRow>
-          ))}
+          ))} */}
         </TableBody>
       </Table>
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>

@@ -28,7 +28,7 @@ function Header() {
         if(localStorage.getItem('token') === "") {
             setUsername(null);
         }
-    });
+    },[username]);
 
     return (
         <React.Fragment>
