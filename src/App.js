@@ -7,27 +7,47 @@ import Posts from './components/Posts'
 // import Stats from './components/Stats';
 import axiosInstance from './axios';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
-import { Link } from '@material-ui/core';
+import { Link as MatUIlink } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { Button, TextField, CircularProgress } from '@material-ui/core';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
 function App() {
   const PostLoading = PostLoadingComponent(Posts);
-  // const StatsLoading = StatsLoadingComponent(Stats);
   const [appState, setAppState] = useState({
     loading: true,
     posts: [],
   });
-
-  const [dat, setData] = useState([]);
 
   const [statsData, setStatsData] = useState({
     loading: true,
     data: [],
   });
 
+  const initialData = Object.freeze({
+    url: null,
+  });
+
+  const [formData, updateFormData] = useState(initialData);
+  const [shortURL, setShortURL] = useState("")
+
+  const handleChange = (e) => {
+    updateFormData({
+      url: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axiosInstance.post('urls/org/', {
+      url: formData.url,
+    }).then((res) => {
+      setShortURL(res.data.shortURL)
+    });
+  }
+  
   useEffect(() => {
     // axiosInstance.get('urls/org/').then((res) => {
     //   const allPosts = res.data;
@@ -41,31 +61,42 @@ function App() {
     }).catch((err) => {
       console.log(err);
     });
-    // fetch('http://127.0.0.1:8000/api/urls/short/').then((res) => res.json()).then((data) => setData(data))
   },[]);
-  console.log(typeof statsData.data);
-  console.log(statsData.data)
 
-  const d = [{
-    "dude": "Jame",
-    "age": 25,
-    "towm": "Los Angeles"
-  },
-  {
-    "dude": "James",
-    "age": 28,
-    "towm": "Los Angeles"
-  },
-  {
-    "dude": "Jam",
-    "age": 29,
-    "towm": "Los Angeles"
-  },]
-  console.log(dat)
+
   return (
     <div className="App">
-      <h1>Latest Posts</h1>
-      <PostLoading isLoading={appState.loading} posts={appState.posts} />
+      { localStorage.getItem("token") === null ? <><h1>Please Log In </h1> <Button
+                    href="#"
+                    color="primary"
+                    variant="outlined"
+                    // className={classes.link}
+                    component={NavLink}
+                    to="/login">
+                            Login
+                    </Button> </>:
+                    <> 
+                    <h1>Short Links, Better Usability</h1>
+                    <TextField id="outlined-basic" label="Past URL here" variant="outlined" onChange={handleChange}/>
+                    <Button 
+                      href="#"
+                      color="primary"
+                      variant="contained"
+                      id="url-button"
+                      type="submit"
+                      onClick={handleSubmit}
+                    >
+                      Go
+                    </Button>
+                    </>
+      }
+      <div id="results-container" component={Paper}>
+                  <>
+                  { shortURL === ""?
+                    <CircularProgress />: <a href={shortURL} target="_blank"><h1>{shortURL}</h1></a>
+                  }
+                  </>
+      </div>
 
       <TableContainer component={Paper}>
         <Table sx={{midWidth: 650}} aria-lable="simple table">
@@ -85,8 +116,8 @@ function App() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row" align="center">{item.get_username}</TableCell>
-                  <TableCell align="center"><Link href={item.shortURL}>{item.shortURL}</Link></TableCell>
-                  <TableCell align="center"><Link href={item.get_original_url}>{item.get_original_url.substr(0,25)}...</Link></TableCell>
+                  <TableCell align="center"><MatUIlink href={item.shortURL}>{item.shortURL}</MatUIlink></TableCell>
+                  <TableCell align="center"><MatUIlink href={item.get_original_url}>{item.get_original_url.substr(0,25)}...</MatUIlink></TableCell>
                   <TableCell align="center">{item.visited}</TableCell>
               </TableRow>
               </>)

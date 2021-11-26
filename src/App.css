@@ -33,6 +33,20 @@
   background-color:dodgerblue;
 }
 
+#url-input-container{
+  background-color: white;
+}
+#url-button {
+  width: 6vw;
+  height: 8vh;
+  margin-left: 1vw;
+}
+
+#results-container{
+  margin-top: 6vh;
+  margin-bottom: 6vh;
+}
+
 .App-link {
   color: #61dafb;
 }
