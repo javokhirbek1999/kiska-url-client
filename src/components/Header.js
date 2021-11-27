@@ -3,7 +3,6 @@ import { AppBar, Button, Link, makeStyles } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
-// import { IconButton } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 
@@ -72,7 +71,6 @@ function Header() {
                     className={classes.link}
                     component={NavLink}
                     to="/user">
-                            {/* <Avatar src="/broken-image.jpg" sx={{width: 15, height: 15, margin: 5}} /> */}
                             {username}
                     </Button>
 }

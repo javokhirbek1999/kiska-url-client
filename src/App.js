@@ -1,24 +1,13 @@
 import React, { useEffect, useState } from 'react'
-// import { TextField, Button } from '@material-ui/core';
 import './App.css';
-import PostLoadingComponent from './components/PostLoading'
-import Posts from './components/Posts'
-// import StatsLoadingComponent from './components/StatsContainer'
-// import Stats from './components/Stats';
 import axiosInstance from './axios';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { Link as MatUIlink } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Button, TextField, CircularProgress } from '@material-ui/core';
 
 
 function App() {
-  const PostLoading = PostLoadingComponent(Posts);
-  const [appState, setAppState] = useState({
-    loading: true,
-    posts: [],
-  });
 
   const [statsData, setStatsData] = useState({
     loading: true,
@@ -41,7 +30,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axiosInstance.post('urls/org/', {
+    axiosInstance.post('urls/', {
       url: formData.url,
     }).then((res) => {
       setShortURL(res.data.shortURL)
@@ -49,13 +38,7 @@ function App() {
   }
   
   useEffect(() => {
-    // axiosInstance.get('urls/org/').then((res) => {
-    //   const allPosts = res.data;
-    //   console.log(allPosts);
-    //   setAppState({ loading: false, posts: allPosts});
-    //   console.log(res.data)
-    // });
-    axiosInstance.get('urls/short/').then((res) => {
+    axiosInstance.get('urls/').then((res) => {
       const allData = res.data;
       setStatsData({loading: false, data: allData});
     }).catch((err) => {
@@ -63,6 +46,7 @@ function App() {
     });
   },[]);
 
+  console.log(statsData.data);
 
   return (
     <div className="App">
@@ -70,7 +54,6 @@ function App() {
                     href="#"
                     color="primary"
                     variant="outlined"
-                    // className={classes.link}
                     component={NavLink}
                     to="/login">
                             Login
@@ -92,7 +75,7 @@ function App() {
       }
       <div id="results-container" component={Paper}>
                   <>
-                  { shortURL === ""?
+                  { statsData.loading && shortURL === ""?
                     <CircularProgress />: <a href={shortURL} target="_blank"><h1>{shortURL}</h1></a>
                   }
                   </>
@@ -105,6 +88,7 @@ function App() {
               <TableCell align="center">User</TableCell>
               <TableCell align="center">Short URL</TableCell>
               <TableCell align="center">Original URL</TableCell>
+              <TableCell align="center">Shortened</TableCell>
               <TableCell align="center">Visited</TableCell>
             </TableRow>
           </TableHead>
@@ -115,9 +99,10 @@ function App() {
                 key={item.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row" align="center">{item.get_username}</TableCell>
-                  <TableCell align="center"><MatUIlink href={item.shortURL}>{item.shortURL}</MatUIlink></TableCell>
-                  <TableCell align="center"><MatUIlink href={item.get_original_url}>{item.get_original_url.substr(0,25)}...</MatUIlink></TableCell>
+                  <TableCell component="th" scope="row" align="center">{item.get_user_username}</TableCell>
+                  <TableCell align="center"><MatUIlink href={item.shortURL} target="_blank">{item.shortURL}</MatUIlink></TableCell>
+                  <TableCell align="center"><MatUIlink href={item.url} target="_blank">{item.url.substr(0,25)}...</MatUIlink></TableCell>
+                  <TableCell align="center">{item.shortened}</TableCell>
                   <TableCell align="center">{item.visited}</TableCell>
               </TableRow>
               </>)
@@ -125,8 +110,6 @@ function App() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      {/* <StatsLoading isLoding={statsData.loading} data={statsData.data}/> */}
     </div>
   );
 }
