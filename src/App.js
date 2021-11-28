@@ -76,13 +76,13 @@ function App() {
       <div id="results-container" component={Paper}>
                   <>
                   { statsData.loading && shortURL === ""?
-                    <CircularProgress />: <a href={shortURL} target="_blank"><h1>{shortURL}</h1></a>
+                    <CircularProgress />: <a href={shortURL} target="_blank" rel="noreferrer"><h1>{shortURL}</h1></a>
                   }
                   </>
       </div>
 
       <TableContainer component={Paper}>
-        <Table sx={{midWidth: 650}} aria-lable="simple table">
+        <Table sx={{midWidth: 650}} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="center">User</TableCell>

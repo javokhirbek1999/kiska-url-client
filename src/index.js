@@ -11,6 +11,12 @@ import Footer from './components/Footer'
 import Register from './components/auth/register'
 import Login from './components/auth/login'
 import Logout from './components/auth/logout'
+import Profile from './components/Profile'
+import ChangePassword from './components/auth/changePassword'
+import ResetPassword from './components/auth/resetPassword'
+import Status from './components/Status'
+import RequestPasswordReset from './components/auth/requestPasswordReset'
+import PasswordResetConfirmation from './components/auth/requestPasswordResetConfirm'
 
 axiosInstance.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axiosInstance.defaults.xsrfCookieName = "csrftoken";
@@ -25,6 +31,12 @@ const routing = (
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
               <Route path='/logout' element={<Logout />} />
+              <Route path={"/profile/"+localStorage.getItem('username')} element={<Profile />} />
+              <Route path={"/change-password/"+localStorage.getItem('username')} element={<ChangePassword/>} />
+              <Route path='/reset-password' element={<ResetPassword />} />
+              <Route path='/status' element={<Status />} />
+              <Route path='/password-reset-confirmation' element={<PasswordResetConfirmation />} />
+              <Route path="/request-password-reset" element={<RequestPasswordReset/>}/>
             </Routes>
         <Footer />
      </React.StrictMode>

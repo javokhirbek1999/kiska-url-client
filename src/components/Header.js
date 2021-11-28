@@ -4,7 +4,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { NavLink } from "react-router-dom";
-import { Avatar } from "@material-ui/core";
+// import { Avatar } from "@material-ui/core";
+// import MenuListComposition from "./Profile";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -70,7 +71,7 @@ function Header() {
                     variant="outlined"
                     className={classes.link}
                     component={NavLink}
-                    to="/user">
+                    to={"/profile/"+localStorage.getItem('username')}>
                             {username}
                     </Button>
 }

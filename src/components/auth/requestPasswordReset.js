@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '../axios/login';
-import {NavLink, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,7 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -36,14 +36,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function SignIn() {
+export default function RequestPasswordReset() {
     const history = useNavigate();
     const initialFormData = Object.freeze({
         email: '',
-        password: ''
     });
 
     const [formData, updateFormDate] = useState(initialFormData);
+
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const handleChange = (e) => {
         updateFormDate({
@@ -52,21 +54,16 @@ export default function SignIn() {
         });
     };
 
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
 
-        axiosInstance.post('api/user/token/', {
-            grant_type: 'password',
+        axiosInstance.post(`api/user/password-reset-request/`, {
             email: formData.email,
-            password: formData.password,
         })
         .then((res) => {
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('username', res.data.username);
-            localStorage.setItem('email', res.data.email)
-            history('/');
-            window.location.reload();
+            history('/password-reset-confirmation');
         });
     };
 
@@ -78,7 +75,7 @@ export default function SignIn() {
             <div className={classes.paper}>
                     <Avatar className={classes.avatar}></Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign In
+                        Request Password Reset
                     </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
@@ -87,27 +84,11 @@ export default function SignIn() {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
                             autoComplete="email"
                             autoFocus
                             onChange={handleChange}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            onChange={handleChange}
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
                         />
                         <Button
                             type="submit"
@@ -117,21 +98,8 @@ export default function SignIn() {
                             className={classes.submit}
                             onClick={handleSubmit}
                         >
-                            Sign In
+                            Submit
                         </Button>
-
-                        <Grid container>
-                            <Grid item xs>
-                                <NavLink to="/request-password-reset" variant="body2">
-                                    <Link>Forgot password?</Link>
-                                </NavLink>
-                            </Grid>
-                            <Grid item>
-                                <NavLink to="/register" variant="body2">
-                                    <Link>{"Don't have an account? Sign Up"}</Link>
-                                </NavLink>
-                            </Grid>
-                        </Grid>
                     </form>
             </div>
         </Container>
