@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { red } from '@material-ui/core/colors';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +45,8 @@ export default function SignIn() {
     });
 
     const [formData, updateFormDate] = useState(initialFormData);
+    const [errorMessage, setErrorMessage] = useState({message: ''});
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
         updateFormDate({
@@ -52,22 +55,39 @@ export default function SignIn() {
         });
     };
 
+    const clearErrorMessage = () => {
+        setErrorMessage({message: ''});
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        
+        setErrorMessage({message: ''})
 
         axiosInstance.post('api/user/token/', {
             grant_type: 'password',
             email: formData.email,
             password: formData.password,
-        })
-        .then((res) => {
+        }).catch(function (error) {
+            if(error.message) {
+                setErrorMessage({message: "Email or password is incorrect"});
+            }
+        });
+
+      if(errorMessage.message === '') {
+        console.log('Yes, credentails are correct')
+        axiosInstance.post('api/user/token/', {
+            grant_type: 'password',
+            email: formData.email,
+            password: formData.password,
+        }).then((res) => {
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('username', res.data.username);
             localStorage.setItem('email', res.data.email)
             history('/');
             window.location.reload();
         });
+      }  
     };
 
     const classes = useStyles();
@@ -80,6 +100,7 @@ export default function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign In
                     </Typography>
+                    <h4 style={{color: 'red'}}>{errorMessage.message}</h4>
                     <form className={classes.form} noValidate>
                         <TextField
                             variant="outlined"
@@ -93,6 +114,19 @@ export default function SignIn() {
                             autoFocus
                             onChange={handleChange}
                         />
+                        { showPassword ?
+                        <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        id="password"
+                        autoComplete="current-password"
+                        onChange={handleChange}
+                    />
+                        :
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -105,9 +139,10 @@ export default function SignIn() {
                             autoComplete="current-password"
                             onChange={handleChange}
                         />
+                        }
                         <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
+                            control={<Checkbox value="remember" color="primary" onClick={()=>setShowPassword(!showPassword)}/>}
+                            label="Show password"
                         />
                         <Button
                             type="submit"

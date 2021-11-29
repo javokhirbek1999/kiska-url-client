@@ -47,6 +47,7 @@ export default function ResetPassword() {
 
     const [showPassword, setShowPassword] = useState(false);
 
+    const [errorMessage, setErrorMessage] = useState({message: ''});
 
     const handleChange = (e) => {
         updateFormDate({
@@ -54,21 +55,32 @@ export default function ResetPassword() {
             [e.target.name]: e.target.value.trim(),
         });
     };
-
-    
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        
+        setErrorMessage({message: ''})
 
-        axiosInstance.put(`api/user/password-reset/`, {
+        axiosInstance.put('api/user/password-reset/', {
             grant_type: 'password',
             new_password: formData.new_password,
             confirm_password: formData.confirm_password,
-        })
-        .then((res) => {
+        }).catch(function (error) {
+            if(error.message) {
+                setErrorMessage({message: "Passwords did not match"});
+            }
+        });
+
+      if(errorMessage.message === '') {
+        console.log('Yes, credentails are correct')
+        axiosInstance.put('api/user/password-reset/', {
+            grant_type: 'password',
+            new_password: formData.new_password,
+            confirm_password: formData.confirm_password,
+        }).then((res) => {
             history('/login');
             window.location.reload();
         });
+      }  
     };
 
     const classes = useStyles();
@@ -81,6 +93,7 @@ export default function ResetPassword() {
                     <Typography component="h1" variant="h5">
                         Reset Password
                     </Typography>
+                    <h4 style={{color: 'red'}}>{errorMessage.message}</h4>
                     <form className={classes.form} noValidate>
                         <TextField
                             variant="outlined"
