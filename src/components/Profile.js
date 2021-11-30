@@ -74,7 +74,7 @@ export default function Profile() {
                             variant="outlined"
                             className={classes.link}
                             component={NavLink}
-                            to="/reset-password"
+                            to="/request-password-reset"
                             style={{marginLeft: 5, marginRight: 5}}>
                                 Reset Password
             </Button>

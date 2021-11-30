@@ -61,7 +61,7 @@ export default function ChangePassword() {
         e.preventDefault();
         // console.log(formData);
 
-        axiosInstance.put('api/user/change-password/', {
+        axiosInstance.put(`api/user/change-password/${localStorage.getItem('username')}/`, {
             old_password: formData.old_password,
             new_password: formData.new_password,
         })
