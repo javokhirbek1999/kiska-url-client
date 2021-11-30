@@ -2,11 +2,13 @@ import axios from "axios";
 
 const baseURL = 'https://kiska.herokuapp.com/api/'
 
+const token = localStorage.getItem('token')
+
 const axiosInstance = axios.create({
     baseURL: baseURL,
     timeout: 5000,
-    headers: {
-        Authorization: 'Token ' + localStorage.getItem('token'),
+    headers: { 
+        Authorization: token !== null ? `Token ${token}`:null,  // If no user is authenticated, leave it blank
         'Content-Type': 'application/json',
         accept: 'application/json',
     },

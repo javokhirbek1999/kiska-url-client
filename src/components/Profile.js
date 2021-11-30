@@ -39,7 +39,7 @@ export default function Profile() {
     const classes = useStyles();
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/user/all/profile/${localStorage.getItem('username')}`).then((res) => {
+        axios.get(`https://kiska.herokuapp.com/api/user/all/profile/${localStorage.getItem('username')}`).then((res) => {
             setUser(res.data);
         })
     },[setUser])

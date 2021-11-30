@@ -40,6 +40,7 @@ export default function SignUp() {
 		email: '',
 		user_name: '',
 		password: '',
+		is_active: true,
 	});
 
 	const [formData, updateFormData] = useState(initialFormData);
@@ -61,6 +62,7 @@ export default function SignUp() {
 				email: formData.email,
 				user_name: formData.user_name,
 				password: formData.password,
+				is_active: formData.is_active
 			})
 			.then((res) => {
 				history('/login');
