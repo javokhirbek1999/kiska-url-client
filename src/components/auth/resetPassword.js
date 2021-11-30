@@ -54,7 +54,7 @@ export default function ResetPassword() {
         
         setErrorMessage({message: ''})
 
-        axiosInstance.put('api/user/password-reset/', {
+        axiosInstance.put(`api/user/password-reset/${localStorage.getItem('username')}/`, {
             grant_type: 'password',
             new_password: formData.new_password,
             confirm_password: formData.confirm_password,
