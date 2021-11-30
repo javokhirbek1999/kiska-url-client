@@ -39,7 +39,8 @@ function App() {
   
   useEffect(() => {
     axiosInstance.get('urls/').then((res) => {
-      const allData = res.data;
+      // Get only latest 10 activities (shortened urls)
+      const allData = res.data.slice(0,10);
       setStatsData({loading: false, data: allData});
     }).catch((err) => {
       console.log(err);
@@ -76,7 +77,7 @@ function App() {
       <div id="results-container" component={Paper}>
                   <>
                   { statsData.loading && shortURL === ""?
-                    <CircularProgress />: <a href={shortURL} target="_blank" rel="noreferrer"><h1>{shortURL}</h1></a>
+                    <CircularProgress />: <a href={shortURL} target="_blank" rel="noreferrer"><h1>{shortURL.substr(8,)}</h1></a>
                   }
                   </>
       </div>
@@ -100,7 +101,7 @@ function App() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row" align="center">{item.get_user_username}</TableCell>
-                  <TableCell align="center"><MatUIlink href={item.shortURL} target="_blank">{item.shortURL}</MatUIlink></TableCell>
+                  <TableCell align="center"><MatUIlink href={item.shortURL} target="_blank">kiska.url{item.shortURL.substr(21,)}</MatUIlink></TableCell>
                   <TableCell align="center"><MatUIlink href={item.url} target="_blank">{item.url.substr(0,25)}...</MatUIlink></TableCell>
                   <TableCell align="center">{item.shortened}</TableCell>
                   <TableCell align="center">{item.visited}</TableCell>
