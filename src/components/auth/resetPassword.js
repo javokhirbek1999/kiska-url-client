@@ -53,13 +53,19 @@ export default function ResetPassword() {
     };
     let path = location.pathname.split('/');
     console.log(`This is location: ${path[path.length-1]}`);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         
         setErrorMessage({message: ''})
         
-        axiosInstance.put(`api/user/password-reset/${path[path.length-1]}/`, {
+        //Set new password endpoint
+        let update_url = 'api/user/password-reset/'+path[path.length-1]+'/';
+        
+        console.log(`This is updated URL: ${update_url}`);
+
+        axiosInstance.put(update_url, {
             grant_type: 'password',
             new_password: formData.new_password,
             confirm_password: formData.confirm_password,
@@ -70,8 +76,10 @@ export default function ResetPassword() {
         });
 
       if(errorMessage.message === '') {
+        
         console.log('Yes, credentails are correct')
-        axiosInstance.put('api/user/password-reset/', {
+
+        axiosInstance.put(update_url, {
             grant_type: 'password',
             new_password: formData.new_password,
             confirm_password: formData.confirm_password,
