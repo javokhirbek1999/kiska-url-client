@@ -25,7 +25,10 @@ const Status = ({props}) => {
     const message = location.hash.replace('%20',' ').replace('#','');
     const classes = useStyles();
     return <div className="App"> 
+    {message === "We have sent you password reset link to your email" ?
+    <Typography variant="h3">{message}</Typography>:
     <Typography variant="h3">{message === "" ? "Password Changed Successfully" : message}</Typography>
+    }
     <Button 
             href="#"
             color="primary"

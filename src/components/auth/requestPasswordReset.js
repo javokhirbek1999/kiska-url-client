@@ -63,7 +63,10 @@ export default function RequestPasswordReset() {
             email: formData.email,
         })
         .then((res) => {
-            history('/password-reset-confirmation');
+            history({
+                pathname: '/status',
+                hash: `${res.data.message}`,
+            })
         });
     };
 
