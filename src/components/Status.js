@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Status = ({props}) => {
     const location = useLocation();
-    const message = location.hash.replace('%20',' ').replace('#','');
+    const message = location.hash.replace("#","").split("%20").join(" ");
     const classes = useStyles();
     return <div className="App"> 
-    {message === "We have sent you password reset link to your email".replace(" ","%20") ?
-    <Typography variant="h6">{"Reset link has been sent to your email"}</Typography>:
+    {message === "We have sent you password reset link to your email" ?
+    <Typography variant="h5">{message}</Typography>:
     <Typography variant="h3">{message === "" ? "Password Changed Successfully" : message}</Typography>
     }
     <Button 
