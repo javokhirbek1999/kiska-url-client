@@ -32,7 +32,7 @@ const routing = (
               <Route path='/logout' element={<Logout />} />
               <Route path={"/profile/"+localStorage.getItem('username')} element={<Profile />} />
               <Route path={"/change-password/"+localStorage.getItem('username')} element={<ChangePassword/>} />
-              <Route path='/reset-password' element={<ResetPassword />} />
+              <Route path='/reset-password/:token' element={<ResetPassword />} />
               <Route path='/status' element={<Status />} />
               <Route path="/request-password-reset" element={<RequestPasswordReset/>}/>
             </Routes>

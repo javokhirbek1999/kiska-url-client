@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '../axios/login';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ResetPassword() {
+    let location = useLocation();
     const history = useNavigate();
     const initialFormData = Object.freeze({
         new_password: '',
@@ -49,12 +51,15 @@ export default function ResetPassword() {
             [e.target.name]: e.target.value.trim(),
         });
     };
+    let path = location.pathname.split('/');
+    console.log(`This is location: ${path[path.length-1]}`);
     const handleSubmit = (e) => {
         e.preventDefault();
+
         
         setErrorMessage({message: ''})
-
-        axiosInstance.put(`api/user/password-reset/${localStorage.getItem('username')}/`, {
+        
+        axiosInstance.put(`api/user/password-reset/${path[path.length-1]}/`, {
             grant_type: 'password',
             new_password: formData.new_password,
             confirm_password: formData.confirm_password,
