@@ -100,7 +100,7 @@ function App() {
                 key={item.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row" align="center">{item.get_user_username}</TableCell>
+                  <TableCell component="th" scope="row" align="center"><NavLink to={"/profile/"+item.get_user_username}>{item.get_user_username}</NavLink></TableCell>
                   <TableCell align="center"><MatUIlink href={item.shortURL} target="_blank">kiska.url{item.shortURL.substr(21,)}</MatUIlink></TableCell>
                   <TableCell align="center"><MatUIlink href={item.url} target="_blank">{item.url.substr(0,25)}...</MatUIlink></TableCell>
                   <TableCell align="center">{item.shortened}</TableCell>

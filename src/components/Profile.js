@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
+import { useLocation } from 'react-router';
 import axios from 'axios';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
@@ -33,16 +34,20 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Profile() {
-    
+    let location = useLocation();
     const [user, setUser] = useState(null);
 
     const classes = useStyles();
 
+    const path = location.pathname.split('/');
+
+    const username = path[path.length-1];
+    
     useEffect(() => {
-        axios.get(`https://kiska.herokuapp.com/api/user/all/profile/${localStorage.getItem('username')}`).then((res) => {
+        axios.get(`https://kiska.herokuapp.com/api/user/all/profile/${username}`).then((res) => {
             setUser(res.data);
         })
-    },[setUser])
+    },[setUser, username])
     console.log(user);
     return (
         <Container component="main" maxWidth="xs">
@@ -58,26 +63,30 @@ export default function Profile() {
                             user !== null ?
                             user.get_date_updated.day + " " + user.get_date_updated.month + ", " + user.get_date_updated.year:""} </span></p>
             </div>
-            <Button
-                            href="#"
-                            color="primary"
-                            variant="outlined"
-                            className={classes.link}
+            { localStorage.getItem('username') === username ?
+                <Button
+                href="#"
+                color="primary"
+                variant="outlined"
+                className={classes.link}
                             component={NavLink}
                             to={"/change-password/"+localStorage.getItem('username')}
                             style={{marginLeft: 5, marginRight: 5}}>
                                 Change Password
-            </Button>
+            </Button>:""
+        }
+        { localStorage.getItem('username') === username ?
             <Button
-                            href="#"
-                            color="primary"
-                            variant="outlined"
-                            className={classes.link}
-                            component={NavLink}
-                            to="/request-password-reset"
-                            style={{marginLeft: 5, marginRight: 5}}>
+            href="#"
+            color="primary"
+            variant="outlined"
+            className={classes.link}
+            component={NavLink}
+            to="/request-password-reset"
+            style={{marginLeft: 5, marginRight: 5}}>
                                 Reset Password
-            </Button>
+            </Button>:""
+        }
         </Container>
     );
 }
