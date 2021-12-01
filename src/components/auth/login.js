@@ -13,7 +13,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { red } from '@material-ui/core/colors';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,10 +53,6 @@ export default function SignIn() {
             [e.target.name]: e.target.value.trim(),
         });
     };
-
-    const clearErrorMessage = () => {
-        setErrorMessage({message: ''});
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
