@@ -16,7 +16,8 @@ Check out the repo of server-side application <a href="https://github.com/javokh
 Checkout the server-side repo for better explaination about how URLs are Hashed on <a href="https://github.com/javokhirbek1999/kiska-url-server-side#request-flow-for-shortening-the-url" target="_blank">here</a>
 ---
 ## Demo
-<p><a href="https://kiska-url.herokuapp.com/" target="_blank">Here</a> you can explore the live web application</p>
+
+<h6><a href="https://kiska-url.herokuapp.com/" target="_blank">Here</a> you can explore the live web application</h6>
 
 ---
 
