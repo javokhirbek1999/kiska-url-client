@@ -16,21 +16,27 @@ Check out the repo of server-side application <a href="https://github.com/javokh
       <a href="#kiskaurl-client">About The Project</a>
       <ul>
         <li><a href="#technologies">Built With</a></li>
+        <li><a href="#request-flow-for-shortening-the-url">How URLs are hashed</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#features">Features</a>
+      <ul>
+        <li><a href="#shows-the-stats-of-latest-activities">Stats about latest activities</a></li>
+        <li><a href="#user-registration">User Registration</a></li>
+        <li><a href="#password-reset-through-email-verification">Password Reset through Email verification</a></li>
+        <li><a href="#profile-page">User Profile</a></li>
+        <li><a href="#password-change">Password Change</a></li>        
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#setup">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 ---
@@ -39,7 +45,7 @@ Check out the repo of server-side application <a href="https://github.com/javokh
 
 Checkout the server-side repo for better explaination about how URLs are Hashed on <a href="https://github.com/javokhirbek1999/kiska-url-server-side#request-flow-for-shortening-the-url" target="_blank">here</a>
 ---
-## Demo
+## Live Running App
 
 <h6><a href="https://kiska-url.herokuapp.com/" target="_blank">Here</a> you can explore the live web application</h6>
 
