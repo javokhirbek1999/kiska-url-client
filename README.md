@@ -30,6 +30,9 @@ Check out the repo of server-side application <a href="https://github.com/javokh
       </ul>
     </li>
     <li>
+      <a href="#technologies">Technologies</a>
+    </li>
+    <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#setup">Installation</a></li>
@@ -39,6 +42,7 @@ Check out the repo of server-side application <a href="https://github.com/javokh
     <li><a href="#license">License</a></li>
   </ol>
 </details>
+
 ---
 ## Request Flow for Shortening the URL
 ![Chat Preview](https://i.imgur.com/5mUbTPr.jpeg)
