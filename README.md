@@ -9,6 +9,30 @@ Check out the repo of server-side application <a href="https://github.com/javokh
 
 ![Chat Preview](https://i.imgur.com/k1so4ss.png)
 
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <ol>
+    <li>
+      <a href="#kiskaurl-client">About The Project</a>
+      <ul>
+        <li><a href="#technologies">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
 ---
 ## Request Flow for Shortening the URL
 ![Chat Preview](https://i.imgur.com/5mUbTPr.jpeg)
