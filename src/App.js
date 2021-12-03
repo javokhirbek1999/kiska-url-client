@@ -48,11 +48,6 @@ function App() {
     });
   },[]);
 
-  const dates = {
-    30: "a month ago"
-  }
-
-  console.log(statsData.data);
   return (
     <div className="App">
       { localStorage.getItem("token") === null ? <><h1>Please Log In </h1> <Button
@@ -105,22 +100,22 @@ function App() {
               var date_diff = new Date(diff);
               var now = "";
               var days = Math.floor(date_diff/1000/60/(60*24))
-                if (days == 0){
+                if (days === 0){
                   now += "Today";
-                }else if (days==1) {
+                }else if (days===1) {
                   now += "Yesterday";
                 } else if (days > 1 && days < 30) {
                   now += days + " days ago";
                 } else if (days > 30 && days < 365) {
                   var months = days/30;
-                  if (months==1) {
+                  if (months===1) {
                     now += "a month ago";
                   } else {
                     now += months + " months ago"
                   }
                 } else {
                   var years = days/365;
-                  if (years==1) {
+                  if (years===1) {
                     now += "a year ago";
                   } else {
                     now += years + " years ago";
@@ -133,7 +128,7 @@ function App() {
                 >
                   <TableCell align="center">{now}</TableCell>
                   <TableCell component="th" scope="row" align="center"><NavLink to={"/profile/"+item.get_user_username}>{item.get_user_username}</NavLink></TableCell>
-                  <TableCell align="center"><MatUIlink href={item.shortURL} target="_blank">kiska.url{item.shortURL.substr(21,)}</MatUIlink></TableCell>
+                  <TableCell align="center"><MatUIlink href={item.shortURL} target="_blank">{item.shortURL.substr(8,)}</MatUIlink></TableCell>
                   <TableCell align="center"><MatUIlink href={item.url} target="_blank">{item.url.substr(0,25)}...</MatUIlink></TableCell>
                   <TableCell align="center">{item.shortened}</TableCell>
                   <TableCell align="center">{item.visited}</TableCell>
