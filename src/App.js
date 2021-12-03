@@ -9,6 +9,7 @@ import { Button, TextField, CircularProgress } from '@material-ui/core';
 
 function App() {
 
+
   const [statsData, setStatsData] = useState({
     loading: true,
     data: [],
@@ -47,8 +48,11 @@ function App() {
     });
   },[]);
 
-  console.log(statsData.data);
+  const dates = {
+    30: "a month ago"
+  }
 
+  console.log(statsData.data);
   return (
     <div className="App">
       { localStorage.getItem("token") === null ? <><h1>Please Log In </h1> <Button
@@ -86,6 +90,7 @@ function App() {
         <Table sx={{midWidth: 650}} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell align="center"></TableCell>
               <TableCell align="center">User</TableCell>
               <TableCell align="center">Short URL</TableCell>
               <TableCell align="center">Original URL</TableCell>
@@ -95,11 +100,38 @@ function App() {
           </TableHead>
           <TableBody>
             {statsData.data.map(item => {
+              var date = new Date(item.date_created.split('-')[0], item.date_created.split('-')[1]-1,item.date_created.split('-')[2].substr(0,2));
+              var diff = new Date()-date;
+              var date_diff = new Date(diff);
+              var now = "";
+              var days = Math.floor(date_diff/1000/60/(60*24))
+                if (days == 0){
+                  now += "Today";
+                }else if (days==1) {
+                  now += "Yesterday";
+                } else if (days > 1 && days < 30) {
+                  now += days + " days ago";
+                } else if (days > 30 && days < 365) {
+                  var months = days/30;
+                  if (months==1) {
+                    now += "a month ago";
+                  } else {
+                    now += months + " months ago"
+                  }
+                } else {
+                  var years = days/365;
+                  if (years==1) {
+                    now += "a year ago";
+                  } else {
+                    now += years + " years ago";
+                  }
+                }
               return ( <>
               <TableRow 
                 key={item.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
+                  <TableCell align="center">{now}</TableCell>
                   <TableCell component="th" scope="row" align="center"><NavLink to={"/profile/"+item.get_user_username}>{item.get_user_username}</NavLink></TableCell>
                   <TableCell align="center"><MatUIlink href={item.shortURL} target="_blank">kiska.url{item.shortURL.substr(21,)}</MatUIlink></TableCell>
                   <TableCell align="center"><MatUIlink href={item.url} target="_blank">{item.url.substr(0,25)}...</MatUIlink></TableCell>
