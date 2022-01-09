@@ -99,7 +99,7 @@ function App() {
               var diff = new Date()-date;
               var date_diff = new Date(diff);
               var now = "";
-              var days = Math.floor(date_diff/1000/60/(60*24))
+              var days = parseInt(Math.floor(date_diff/1000/60/(60*24)));
                 if (days === 0){
                   now += "Today";
                 }else if (days===1) {
@@ -107,14 +107,14 @@ function App() {
                 } else if (days > 1 && days < 30) {
                   now += days + " days ago";
                 } else if (days > 30 && days < 365) {
-                  var months = days/30;
+                  var months = parseInt(days/30);
                   if (months===1) {
                     now += "a month ago";
                   } else {
                     now += months + " months ago"
                   }
                 } else {
-                  var years = days/365;
+                  var years = parseInt(days/365);
                   if (years===1) {
                     now += "a year ago";
                   } else {
